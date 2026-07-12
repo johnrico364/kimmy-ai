@@ -1,6 +1,6 @@
 import User from "../module/user/user.model.js";
 import Lead from "../module/lead/lead.model.js";
-import OutreachLog from "../module/outlook/outlook.model.js";
+import OutreachLog from "../module/outreach/outreach.model.js";
 
 const outreachLogs = [
   {
@@ -94,7 +94,7 @@ const outreachLogs = [
   },
 ];
 
-export async function seedOutlook() {
+export async function seedOutreach() {
   console.log("Seeding outreach logs...");
 
   let seededCount = 0;

@@ -2,12 +2,12 @@ import "dotenv/config";
 import { connectMongoDB, disconnectMongoDB } from "../config/mongodb.js";
 import { seedUsers } from "./userSeeder.js";
 import { seedLeads } from "./leadSeeder.js";
-import { seedOutlook } from "./outloookSeeder.js";
+import { seedOutreach } from "./outreachSeeder.js";
 
 const seeders = {
   user: seedUsers,
   lead: seedLeads,
-  outlook: seedOutlook,
+  outreach: seedOutreach,
 };
 
 const runAll = async () => {
