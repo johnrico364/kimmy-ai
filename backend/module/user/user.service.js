@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import validator from "validator";
 import User from "./user.model.js";
 
 export class AppError extends Error {
@@ -35,6 +36,19 @@ export const UserService = {
   }) {
     if (!name || !email || !password) {
       throw new AppError("Name, email, and password are required", 400);
+    }
+
+    if (!validator.isEmail(email)) {
+      throw new AppError("Invalid email address", 400);
+    }
+
+    if (
+      !validator.isStrongPassword(password)
+    ) {
+      throw new AppError(
+        "Password must be at least 8 characters and include a letter, a number, and a special character",
+        400,
+      );
     }
 
     const existingUser = await User.findOne({ email });

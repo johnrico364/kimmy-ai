@@ -2,7 +2,7 @@ import "dotenv/config";
 import http from "http";
 import express from "express";
 import { connectMongoDB, disconnectMongoDB } from "./config/mongodb.js";
-import { getRedisClient, closeRedis } from "./config/redis.js";
+import { connectRedis, closeRedis } from "./config/redis.js";
 import { getModel } from "./config/ai.js";
 import { initSocket } from "./config/socket.js";
 import userRouter from "./module/user/user.route.js";
@@ -21,7 +21,7 @@ const httpServer = http.createServer(app);
 
 async function startServer() {
   await connectMongoDB();
-  getRedisClient();
+  await connectRedis();
   getModel();
   initSocket(httpServer);
 
