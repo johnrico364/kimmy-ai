@@ -6,12 +6,14 @@ import { connectRedis, closeRedis } from "./config/redis.js";
 import { getModel } from "./config/ai.js";
 import { initSocket } from "./config/socket.js";
 import userRouter from "./module/user/user.route.js";
+import leadRouter from "./module/lead/lead.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use("/api/auth", userRouter);
+app.use("/api/leads", leadRouter);
 
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
