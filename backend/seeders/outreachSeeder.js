@@ -106,14 +106,14 @@ export async function seedOutreach() {
       continue;
     }
 
-    const lead = await Lead.findOne({ userId: user._id, email: log.leadEmail });
+    const lead = await Lead.findOne({ userId: user._id, email: log.leadEmail, isDeleted: false });
     if (!lead) {
       console.warn(`  ⚠ Skipping outreach — lead not found: ${log.leadEmail}`);
       continue;
     }
 
     const result = await OutreachLog.findOneAndUpdate(
-      { leadId: lead._id, userId: user._id, type: log.type, subject: log.subject },
+      { leadId: lead._id, userId: user._id, type: log.type, subject: log.subject, isDeleted: false },
       {
         leadId: lead._id,
         userId: user._id,

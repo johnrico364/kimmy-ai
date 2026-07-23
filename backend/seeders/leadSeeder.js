@@ -98,7 +98,7 @@ export async function seedLeads() {
     }
 
     const result = await Lead.findOneAndUpdate(
-      { userId: user._id, email: lead.email },
+      { userId: user._id, email: lead.email, isDeleted: false },
       {
         userId: user._id,
         firstName: lead.firstName,

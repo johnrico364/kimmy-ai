@@ -34,9 +34,17 @@ const LeadSchema = new mongoose.Schema({
     enum: ['new', 'pitch_ready', 'emailed', 'replied', 'unresponsive'],
     default: 'new',
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  deletedAt: {
+    type: Date,
+    default: null,
+  },
 }, { timestamps: true });
 
 // Performance Optimization: Compound index for quick dashboard loading filtered by user and status
-LeadSchema.index({ userId: 1, status: 1 });
+LeadSchema.index({ userId: 1, status: 1, isDeleted: 1 });
 
 export default mongoose.model("Lead", LeadSchema);

@@ -37,10 +37,18 @@ const OutreachLogSchema = new mongoose.Schema({
       urgency: { type: String, enum: ['high', 'medium', 'low'] },
       summary: String,
     }
-  }
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  deletedAt: {
+    type: Date,
+    default: null,
+  },
 }, { timestamps: true });
 
 // Indexing for quick chronological lookups of a lead's touchpoints
-OutreachLogSchema.index({ leadId: 1, createdAt: -1 });
+OutreachLogSchema.index({ leadId: 1, isDeleted: 1, createdAt: -1 });
 
 export default mongoose.model("OutreachLog", OutreachLogSchema);
