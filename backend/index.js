@@ -8,6 +8,8 @@ import { initSocket } from "./config/socket.js";
 import userRouter from "./module/user/user.route.js";
 import leadRouter from "./module/lead/lead.route.js";
 import outreachRouter from "./module/outreach/outreach.route.js";
+import webhookRouter from "./module/webhook/webhook.route.js";
+import analyticsRouter from "./module/analytics/analytics.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use("/api/auth", userRouter);
 app.use("/api/leads", leadRouter);
 app.use("/api/outreach", outreachRouter);
+app.use("/api/webhooks", webhookRouter);
+app.use("/api/analytics", analyticsRouter);
 
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
