@@ -42,3 +42,28 @@ export const getOutreachLogs = async (req, res) => {
     return handleError(res, err);
   }
 };
+
+export const updateOutreachLog = async (req, res) => {
+  try {
+    const result = await OutreachService.updateLog(
+      req.user._id,
+      req.params.logId,
+      req.body,
+    );
+    return res.status(200).json(result);
+  } catch (err) {
+    return handleError(res, err);
+  }
+};
+
+export const sendOutreach = async (req, res) => {
+  try {
+    const result = await OutreachService.sendLog(
+      req.user._id,
+      req.body.logId,
+    );
+    return res.status(200).json(result);
+  } catch (err) {
+    return handleError(res, err);
+  }
+};
